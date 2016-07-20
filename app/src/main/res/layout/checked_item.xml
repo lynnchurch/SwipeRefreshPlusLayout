@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="?attr/listPreferredItemHeight">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_recycler_item"
+        android:gravity="center"
+        android:orientation="vertical">
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_feature_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            android:background="?android:attr/listDivider"/>
+    </LinearLayout>
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/cb_select"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right|center_vertical"
+        android:visibility="gone"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+</FrameLayout>

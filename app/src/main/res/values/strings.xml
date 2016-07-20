@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SwipeRefreshPlusLayout</string>
+    <string name="delete">删除</string>
+    <string name="add">添加</string>
+</resources>
