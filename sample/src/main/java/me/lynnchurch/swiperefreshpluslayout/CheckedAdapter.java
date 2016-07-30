@@ -3,7 +3,6 @@ package me.lynnchurch.swiperefreshpluslayout;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,15 +17,14 @@ import java.util.List;
 
 public class CheckedAdapter extends BaseAdapter
 {
+    private static final String TAG = CheckedAdapter.class.getSimpleName();
     private List<String> mDataSet;
     private List<Boolean> mCheckedStates;
     private boolean mIsShowCheckedIcons;
-    private int mIndex;
 
     public CheckedAdapter(List<String> dataSet)
     {
         mDataSet = dataSet;
-        mIndex=mDataSet.size();
         initCheckedStates();
     }
 
@@ -45,7 +43,6 @@ public class CheckedAdapter extends BaseAdapter
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        Log.i("TAG", "onCreateViewHolder: ");
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.checked_item, parent, false));
     }
 
@@ -85,7 +82,7 @@ public class CheckedAdapter extends BaseAdapter
         }
     }
 
-    public void showCheckedIcons(AppCompatCheckBox cb, int position)
+    public void showCheckedIcons(AppCompatCheckBox cb)
     {
         mIsShowCheckedIcons = true;
         cb.setChecked(true);
@@ -95,6 +92,15 @@ public class CheckedAdapter extends BaseAdapter
     public void hideCheckedIcons()
     {
         mIsShowCheckedIcons = false;
+        initCheckedStates();
+        notifyDataSetChanged();
+    }
+
+    /**
+     * 当数据集更新，用notifyCheckedDataSetChanged()代替notifyDataSetChanged()
+     */
+    public void notifyCheckedDataSetChanged()
+    {
         initCheckedStates();
         notifyDataSetChanged();
     }
@@ -111,12 +117,5 @@ public class CheckedAdapter extends BaseAdapter
         }
         mDataSet.removeAll(checkedItems);
         hideCheckedIcons();
-    }
-
-    public void addItem()
-    {
-        mDataSet.add("item" + mIndex++);
-        initCheckedStates();
-        notifyDataSetChanged();
     }
 }

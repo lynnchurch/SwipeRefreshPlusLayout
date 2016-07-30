@@ -23,7 +23,7 @@
     <android.support.v7.widget.AppCompatCheckBox
         android:id="@+id/cb_select"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="right|center_vertical"
         android:visibility="gone"
         android:layout_marginRight="@dimen/activity_horizontal_margin"/>
