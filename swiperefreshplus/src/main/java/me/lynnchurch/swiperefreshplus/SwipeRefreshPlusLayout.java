@@ -120,6 +120,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     private float mLastY;
     private float mPullDistance;
     private float mLoadMoreViewMoveDistance;
+    private float mOnceMoveDistance;
     private boolean mEnableLoadMore;
     private OnLoadMoreListener mLoadMoreListener;
     private boolean mLoadingMore = false;
@@ -937,6 +938,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator)
             {
+                mTarget.scrollBy(0,10000);
                 float value = (float) valueAnimator.getAnimatedValue();
                 mTarget.setTranslationY(value);
                 mLoadMoreView.setTranslationY(value);
@@ -1000,6 +1002,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
         switch (action)
         {
             case MotionEvent.ACTION_DOWN:
+                mOnceMoveDistance = 0;
                 mLastY = 0;
                 mActivePointerId = MotionEventCompat.getPointerId(ev, 0);
                 break;
@@ -1022,6 +1025,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
                 {
                     // 为了防止错位现象
                     mTarget.scrollBy(0, mLoadMoreView.getMeasuredHeight());
+                    mOnceMoveDistance += mPullDistance;
                 }
                 float y = getMotionEventY(ev, mActivePointerId);
                 if (0 == mLastY)
@@ -1035,14 +1039,13 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
             case MotionEvent.ACTION_CANCEL:
                 if (mLoadMoreViewMoveDistance < 0)
                 {
-                    if (mLoadMoreViewMoveDistance < -mLoadMoreView.getMeasuredHeight() / 2)
+                    if ( mOnceMoveDistance < 0)
                     {
                         // 如果正在加载更多则不进行加载更多
                         if (!mLoadingMore)
                         {
                             setLoadingMore(true);
-                        }
-                        else
+                        } else
                         {
                             runShowLoadMoreAnim();
                         }
@@ -1050,6 +1053,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
                     {
                         runHideLoadMoreAnim();
                     }
+                    return false;
                 }
                 break;
             default:
@@ -1396,10 +1400,6 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     public boolean onNestedFling(View target, float velocityX, float velocityY,
                                  boolean consumed)
     {
-        if (velocityY < 0)
-        {
-            runHideLoadMoreAnim();
-        }
         return dispatchNestedFling(velocityX, velocityY, consumed);
     }
 
