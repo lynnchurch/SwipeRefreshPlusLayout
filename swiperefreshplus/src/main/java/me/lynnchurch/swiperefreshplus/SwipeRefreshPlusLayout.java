@@ -393,31 +393,6 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     }
 
     /**
-     * 开始加载更多动画
-     */
-    private void startLoadMoreAnim()
-    {
-        if (View.VISIBLE != image_view.getVisibility())
-        {
-            image_view.setVisibility(View.VISIBLE);
-            mLoadMoreProgress.start();
-        }
-    }
-
-    /**
-     * 停止加载更多动画
-     */
-    private void stopLoadMoreAnim()
-    {
-        if (View.VISIBLE == image_view.getVisibility())
-        {
-            image_view.setVisibility(View.GONE);
-            mLoadMoreProgress.stop();
-        }
-    }
-
-
-    /**
      * Set the listener to be notified when a refresh is triggered via the swipe
      * gesture.
      */
