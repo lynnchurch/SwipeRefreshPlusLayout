@@ -10,7 +10,7 @@ Expand the function of loading more to android.support.v4.widget.SwipeRefreshLay
 **1.** Add a dependency to your `build.gradle`:
 ```
 dependencies {
-    compile 'me.lynnchurch:swipe-refresh-plus-layout:1.1.0'
+    compile 'me.lynnchurch:swipe-refresh-plus-layout:1.2.0'
 }
 ```
 
@@ -26,22 +26,22 @@ dependencies {
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"/>
-    </me.lynnchurch.swiperefreshplus.SwipeRefreshPlusLayout>
+ </me.lynnchurch.swiperefreshplus.SwipeRefreshPlusLayout>
 ```
 
 **3.** Add the code of loading more(the code of refresh is the same with android.support.v4.widget.SwipeRefreshLayout):
 ```java
-        // enable the function of loading more
-        swipe_refresh.setLoadMoreEnable(true);
-        // set the animation colors of loading more
-        swipe_refresh.setLoadMoreColorSchemeResources(R.color.swipe_color_1);
-        // set the OnLoadMoreListener
-        swipe_refresh.setOnLoadMoreListener(new SwipeRefreshPlusLayout.OnLoadMoreListener()
+    // enable the function of loading more
+    swipe_refresh.setLoadMoreEnable(true);
+    // set the animation colors of loading more
+    swipe_refresh.setLoadMoreColorSchemeResources(R.color.swipe_color_1);
+    // set the OnLoadMoreListener
+    swipe_refresh.setOnLoadMoreListener(new SwipeRefreshPlusLayout.OnLoadMoreListener()
+    {
+        @Override
+        public void onLoadMore()
         {
-            @Override
-            public void onLoadMore()
-            {
-                simulateLoadMoreData();
-            }
-        });
+            simulateLoadMoreData();
+        }
+    });
 ```
