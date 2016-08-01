@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity
             {
                 try
                 {
-                    Thread.sleep(3 * 1000);
+                    Thread.sleep(2 * 1000);
                     loadMoreData();
                     mHandler.sendEmptyMessage(LOADMORE);
                 } catch (InterruptedException e)
@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity
      */
     private void loadMoreData()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 10; i++)
         {
             mItems.add("item" + mIndex++);
         }
