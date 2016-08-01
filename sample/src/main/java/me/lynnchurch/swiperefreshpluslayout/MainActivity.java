@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity
 
         swipe_refresh = (SwipeRefreshPlusLayout) findViewById(R.id.swipe_refresh);
         swipe_refresh.setColorSchemeResources(R.color.swipe_color_1, R.color.swipe_color_2, R.color.swipe_color_3, R.color.swipe_color_4);
-        swipe_refresh.setEnableLoadMore(true);
+        swipe_refresh.setLoadMoreEnable(true);
         swipe_refresh.setLoadMoreColorSchemeResources(R.color.swipe_color_1);
         swipe_refresh.setOnRefreshListener(new SwipeRefreshPlusLayout.OnRefreshListener()
         {

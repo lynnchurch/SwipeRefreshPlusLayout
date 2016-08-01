@@ -386,7 +386,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
      *
      * @param enable
      */
-    public void setEnableLoadMore(boolean enable)
+    public void setLoadMoreEnable(boolean enable)
     {
         mEnableLoadMore = enable;
         mLoadMoreView.setVisibility(mEnableLoadMore ? View.VISIBLE : View.GONE);
