@@ -29,7 +29,7 @@ import android.view.animation.Transformation;
 import android.widget.AbsListView;
 
 /**
- * å¯¹android.support.v4.widget.SwipeRefreshLayoutæ‰©å±•äº†ä¸Šæ‹‰åŠ è½½æ›´å¤šåŠŸèƒ½
+ * ¶Ôandroid.support.v4.widget.SwipeRefreshLayoutÀ©Õ¹ÁËÉÏÀ­¼ÓÔØ¸ü¶à¹¦ÄÜ
  * Created by Lynn on 2016-7-21.
  */
 
@@ -382,7 +382,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     }
 
     /**
-     * æ˜¯å¦å¼€å¯åŠ è½½æ›´å¤šåŠŸèƒ½
+     * ÊÇ·ñ¿ªÆô¼ÓÔØ¸ü¶à¹¦ÄÜ
      *
      * @param enable
      */
@@ -402,7 +402,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     }
 
     /**
-     * è®¾ç½®åŠ è½½æ›´å¤šçš„ç›‘å¬å™¨
+     * ÉèÖÃ¼ÓÔØ¸ü¶àµÄ¼àÌıÆ÷
      *
      * @param listener
      */
@@ -450,7 +450,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     }
 
     /**
-     * è®¾ç½®åŠ è½½æ›´å¤šçš„çŠ¶æ€
+     * ÉèÖÃ¼ÓÔØ¸ü¶àµÄ×´Ì¬
      *
      * @param loadingMore
      */
@@ -626,7 +626,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     }
 
     /**
-     * è®¾ç½®åŠ è½½æ›´å¤šåŠ¨ç”»çš„é¢œè‰²é›†
+     * ÉèÖÃ¼ÓÔØ¸ü¶à¶¯»­µÄÑÕÉ«¼¯
      *
      * @param colorResIds
      */
@@ -642,7 +642,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     }
 
     /**
-     * è®¾ç½®åŠ è½½æ›´å¤šåŠ¨ç”»çš„é¢œè‰²é›†
+     * ÉèÖÃ¼ÓÔØ¸ü¶à¶¯»­µÄÑÕÉ«¼¯
      *
      * @param colors
      */
@@ -693,7 +693,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     }
 
     /**
-     * æ˜¯å¦æ­£åœ¨åŠ è½½æ›´å¤š
+     * ÊÇ·ñÕıÔÚ¼ÓÔØ¸ü¶à
      *
      * @return
      */
@@ -884,7 +884,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     }
 
     /**
-     * å­é¡¹æ˜¯å¦èƒ½å……æ»¡çˆ¶å®¹å™¨
+     * ×ÓÏîÊÇ·ñÄÜ³äÂú¸¸ÈİÆ÷
      *
      * @return
      */
@@ -901,7 +901,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     }
 
     /**
-     * æ‰§è¡Œæ˜¾ç¤ºåŠ è½½æ›´å¤šåŠ¨ç”»
+     * Ö´ĞĞÏÔÊ¾¼ÓÔØ¸ü¶à¶¯»­
      */
     private void runShowLoadMoreAnim()
     {
@@ -924,7 +924,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     }
 
     /**
-     * æ‰§è¡Œéšè—åŠ è½½æ›´å¤šåŠ¨ç”»
+     * Ö´ĞĞÒş²Ø¼ÓÔØ¸ü¶à¶¯»­
      */
     private void runHideLoadMoreAnim()
     {
@@ -998,9 +998,9 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
             case MotionEvent.ACTION_MOVE:
                 if (mLoadMoreViewMoveDistance < 0)
                 {
-                    // ä¸ºäº†é˜²æ­¢é”™ä½ç°è±¡
+                    // ÎªÁË·ÀÖ¹´íÎ»ÏÖÏó
                     mTarget.scrollBy(0, mLoadMoreView.getMeasuredHeight());
-                    mOnceMoveDistance += mPullDistance;
+                    mOnceMoveDistance += mPullDistance*1.2;
                 }
                 float y = getMotionEventY(ev, mActivePointerId);
                 if (0 == mLastY)
@@ -1016,7 +1016,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
                 {
                     if ( mOnceMoveDistance < 0)
                     {
-                        // å¦‚æœæ­£åœ¨åŠ è½½æ›´å¤šåˆ™ä¸è¿›è¡ŒåŠ è½½æ›´å¤š
+                        // Èç¹ûÕıÔÚ¼ÓÔØ¸ü¶àÔò²»½øĞĞ¼ÓÔØ¸ü¶à
                         if (!mLoadingMore)
                         {
                             setLoadingMore(true);
@@ -1599,7 +1599,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
 
     private void setTargetOffsetTopAndBottom(int offset, boolean requiresUpdate)
     {
-        // åˆ·æ–°å’ŒåŠ è½½æ›´å¤šä¸èƒ½åŒæ—¶è¿›è¡Œ
+        // Ë¢ĞÂºÍ¼ÓÔØ¸ü¶à²»ÄÜÍ¬Ê±½øĞĞ
         if (!mLoadingMore)
         {
             mCircleView.bringToFront();
@@ -1638,7 +1638,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     }
 
     /**
-     * ç”¨äºç›‘å¬åŠ è½½æ›´å¤š
+     * ÓÃÓÚ¼àÌı¼ÓÔØ¸ü¶à
      */
     public interface OnLoadMoreListener
     {
