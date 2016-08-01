@@ -44,4 +44,7 @@ swipe_refresh.setOnLoadMoreListener(new SwipeRefreshPlusLayout.OnLoadMoreListene
         simulateLoadMoreData();
     }
 });
+// when the loading more is finished
+swipe_refresh.setLoadingMore(false);
+
 ```
