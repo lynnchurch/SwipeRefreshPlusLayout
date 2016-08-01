@@ -31,17 +31,17 @@ dependencies {
 
 **3.** Add the code of loading more(the code of refresh is the same with android.support.v4.widget.SwipeRefreshLayout):
 ```java
-    // enable the function of loading more
-    swipe_refresh.setLoadMoreEnable(true);
-    // set the animation colors of loading more
-    swipe_refresh.setLoadMoreColorSchemeResources(R.color.swipe_color_1);
-    // set the OnLoadMoreListener
-    swipe_refresh.setOnLoadMoreListener(new SwipeRefreshPlusLayout.OnLoadMoreListener()
+// enable the function of loading more
+swipe_refresh.setLoadMoreEnable(true);
+// set the animation colors of loading more
+swipe_refresh.setLoadMoreColorSchemeResources(R.color.swipe_color_1);
+// set the OnLoadMoreListener
+swipe_refresh.setOnLoadMoreListener(new SwipeRefreshPlusLayout.OnLoadMoreListener()
+{
+    @Override
+    public void onLoadMore()
     {
-        @Override
-        public void onLoadMore()
-        {
-            simulateLoadMoreData();
-        }
-    });
+        simulateLoadMoreData();
+    }
+});
 ```
