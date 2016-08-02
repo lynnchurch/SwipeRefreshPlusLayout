@@ -29,7 +29,7 @@ import android.view.animation.Transformation;
 import android.widget.AbsListView;
 
 /**
- * ¶Ôandroid.support.v4.widget.SwipeRefreshLayoutÀ©Õ¹ÁËÉÏÀ­¼ÓÔØ¸ü¶à¹¦ÄÜ
+ * Expand the function of loading more to android.support.v4.widget.SwipeRefreshLayout.
  * Created by Lynn on 2016-7-21.
  */
 
@@ -382,11 +382,11 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     }
 
     /**
-     * ÊÇ·ñ¿ªÆô¼ÓÔØ¸ü¶à¹¦ÄÜ
+     * whether to enable the function of loading more
      *
      * @param enable
      */
-    public void setLoadMoreEnable(boolean enable)
+    public void setEnableLoadMore(boolean enable)
     {
         mEnableLoadMore = enable;
         mLoadMoreView.setVisibility(mEnableLoadMore ? View.VISIBLE : View.GONE);
@@ -402,7 +402,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     }
 
     /**
-     * ÉèÖÃ¼ÓÔØ¸ü¶àµÄ¼àÌıÆ÷
+     * Set the listener to be notified when a loading more is triggered
      *
      * @param listener
      */
@@ -450,7 +450,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     }
 
     /**
-     * ÉèÖÃ¼ÓÔØ¸ü¶àµÄ×´Ì¬
+     * Notify the widget that loading more state has changed.
      *
      * @param loadingMore
      */
@@ -626,7 +626,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     }
 
     /**
-     * ÉèÖÃ¼ÓÔØ¸ü¶à¶¯»­µÄÑÕÉ«¼¯
+     * Set the colors of loading more animation
      *
      * @param colorResIds
      */
@@ -642,7 +642,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     }
 
     /**
-     * ÉèÖÃ¼ÓÔØ¸ü¶à¶¯»­µÄÑÕÉ«¼¯
+     * Set the colors of loading more animation
      *
      * @param colors
      */
@@ -693,7 +693,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     }
 
     /**
-     * ÊÇ·ñÕıÔÚ¼ÓÔØ¸ü¶à
+     * Whether the SwipeRefreshWidget is actively showing loading more progress
      *
      * @return
      */
@@ -884,7 +884,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     }
 
     /**
-     * ×ÓÏîÊÇ·ñÄÜ³äÂú¸¸ÈİÆ÷
+     * Whether child items can fill parent container
      *
      * @return
      */
@@ -901,7 +901,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     }
 
     /**
-     * Ö´ĞĞÏÔÊ¾¼ÓÔØ¸ü¶à¶¯»­
+     * show loading more animation
      */
     private void runShowLoadMoreAnim()
     {
@@ -924,7 +924,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     }
 
     /**
-     * Ö´ĞĞÒş²Ø¼ÓÔØ¸ü¶à¶¯»­
+     * hide loading more animation
      */
     private void runHideLoadMoreAnim()
     {
@@ -998,7 +998,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
             case MotionEvent.ACTION_MOVE:
                 if (mLoadMoreViewMoveDistance < 0)
                 {
-                    // ÎªÁË·ÀÖ¹´íÎ»ÏÖÏó
+                    // ä¸ºäº†é˜²æ­¢é”™ä½ç°è±¡
                     mTarget.scrollBy(0, mLoadMoreView.getMeasuredHeight());
                     mOnceMoveDistance += mPullDistance*1.2;
                 }
@@ -1016,7 +1016,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
                 {
                     if ( mOnceMoveDistance < 0)
                     {
-                        // Èç¹ûÕıÔÚ¼ÓÔØ¸ü¶àÔò²»½øĞĞ¼ÓÔØ¸ü¶à
+                        // å¦‚æœæ­£åœ¨åŠ è½½æ›´å¤šåˆ™ä¸è¿›è¡ŒåŠ è½½æ›´å¤š
                         if (!mLoadingMore)
                         {
                             setLoadingMore(true);
@@ -1599,7 +1599,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
 
     private void setTargetOffsetTopAndBottom(int offset, boolean requiresUpdate)
     {
-        // Ë¢ĞÂºÍ¼ÓÔØ¸ü¶à²»ÄÜÍ¬Ê±½øĞĞ
+        // åˆ·æ–°å’ŒåŠ è½½æ›´å¤šä¸èƒ½åŒæ—¶è¿›è¡Œ
         if (!mLoadingMore)
         {
             mCircleView.bringToFront();
@@ -1638,7 +1638,8 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     }
 
     /**
-     * ÓÃÓÚ¼àÌı¼ÓÔØ¸ü¶à
+     * Classes that wish to be notified when the swipe gesture correctly
+     * triggers a loading more should implement this interface.
      */
     public interface OnLoadMoreListener
     {
