@@ -22,7 +22,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Transformation;
@@ -386,7 +385,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
      *
      * @param enable
      */
-    public void setEnableLoadMore(boolean enable)
+    public void setLoadMoreEnable(boolean enable)
     {
         mEnableLoadMore = enable;
         mLoadMoreView.setVisibility(mEnableLoadMore ? View.VISIBLE : View.GONE);
@@ -906,7 +905,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     private void runShowLoadMoreAnim()
     {
         ValueAnimator showLoadMoreAnim = ValueAnimator.ofFloat(mLoadMoreViewMoveDistance, -mLoadMoreView.getMeasuredHeight());
-        showLoadMoreAnim.setInterpolator(new AccelerateInterpolator());
+        showLoadMoreAnim.setInterpolator(new DecelerateInterpolator());
         showLoadMoreAnim.setDuration(LOAD_MORE_ANIMATION_DURATION);
         showLoadMoreAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
         {
@@ -929,7 +928,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     private void runHideLoadMoreAnim()
     {
         ValueAnimator hideLoadMoreAnim = ValueAnimator.ofFloat(mLoadMoreViewMoveDistance, 0);
-        hideLoadMoreAnim.setInterpolator(new AccelerateInterpolator());
+        hideLoadMoreAnim.setInterpolator(new DecelerateInterpolator());
         hideLoadMoreAnim.setDuration(LOAD_MORE_ANIMATION_DURATION);
         hideLoadMoreAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
         {
@@ -1000,7 +999,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
                 {
                     // 为了防止错位现象
                     mTarget.scrollBy(0, mLoadMoreView.getMeasuredHeight());
-                    mOnceMoveDistance += mPullDistance*1.2;
+                    mOnceMoveDistance += mPullDistance*1.5;
                 }
                 float y = getMotionEventY(ev, mActivePointerId);
                 if (0 == mLastY)
@@ -1599,7 +1598,7 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
 
     private void setTargetOffsetTopAndBottom(int offset, boolean requiresUpdate)
     {
-        // 刷新和加载更多不能同时进行
+        // refresh and loading more can't be triggered at the same time
         if (!mLoadingMore)
         {
             mCircleView.bringToFront();
