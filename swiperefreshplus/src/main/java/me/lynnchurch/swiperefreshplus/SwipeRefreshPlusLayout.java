@@ -1,5 +1,6 @@
 package me.lynnchurch.swiperefreshplus;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Resources;
@@ -123,6 +124,8 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
     private boolean mEnableLoadMore;
     private OnLoadMoreListener mLoadMoreListener;
     private boolean mLoadingMore = false;
+    ValueAnimator mShowLoadMoreAnim;
+    private boolean mIsLoadingMoreAnimRuning;
 
     protected int mFrom;
 
@@ -465,11 +468,20 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
             }
         } else
         {
-            mTarget.scrollBy(0, mLoadMoreView.getMeasuredHeight());
-            mLoadMoreView.setTranslationY(0);
-            mTarget.setTranslationY(0);
-            mLoadMoreViewMoveDistance = 0;
+            if(mIsLoadingMoreAnimRuning)
+            {
+                mShowLoadMoreAnim.cancel();
+            }
+            hideLoadingMoreView();
         }
+    }
+
+    private void hideLoadingMoreView()
+    {
+        mTarget.scrollBy(0, mLoadMoreView.getMeasuredHeight());
+        mLoadMoreView.setTranslationY(0);
+        mTarget.setTranslationY(0);
+        mLoadMoreViewMoveDistance = 0;
     }
 
     private void startScaleUpAnimation(Animation.AnimationListener listener)
@@ -904,10 +916,10 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
      */
     private void runShowLoadMoreAnim()
     {
-        ValueAnimator showLoadMoreAnim = ValueAnimator.ofFloat(mLoadMoreViewMoveDistance, -mLoadMoreView.getMeasuredHeight());
-        showLoadMoreAnim.setInterpolator(new DecelerateInterpolator());
-        showLoadMoreAnim.setDuration(LOAD_MORE_ANIMATION_DURATION);
-        showLoadMoreAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
+        mShowLoadMoreAnim= ValueAnimator.ofFloat(mLoadMoreViewMoveDistance, -mLoadMoreView.getMeasuredHeight());
+        mShowLoadMoreAnim.setInterpolator(new DecelerateInterpolator());
+        mShowLoadMoreAnim.setDuration(LOAD_MORE_ANIMATION_DURATION);
+        mShowLoadMoreAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
         {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator)
@@ -919,7 +931,33 @@ public class SwipeRefreshPlusLayout extends ViewGroup implements NestedScrolling
                 mLoadMoreViewMoveDistance = value;
             }
         });
-        showLoadMoreAnim.start();
+        mShowLoadMoreAnim.addListener(new Animator.AnimatorListener()
+        {
+            @Override
+            public void onAnimationStart(Animator animator)
+            {
+                mIsLoadingMoreAnimRuning=true;
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator)
+            {
+                mIsLoadingMoreAnimRuning=false;
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator)
+            {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator)
+            {
+
+            }
+        });
+        mShowLoadMoreAnim.start();
     }
 
     /**
