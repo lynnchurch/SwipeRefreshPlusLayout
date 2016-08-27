@@ -10,7 +10,7 @@ Expand the function of loading more to android.support.v4.widget.SwipeRefreshLay
 **1.** Add a dependency to your `build.gradle`:
 ```
 dependencies {
-    compile 'me.lynnchurch:swipe-refresh-plus-layout:1.3.0'
+    compile 'me.lynnchurch:swipe-refresh-plus-layout:1.4.0'
 }
 ```
 
